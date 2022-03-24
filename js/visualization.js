@@ -76,4 +76,4 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
   
           
 
-}                
+})                
