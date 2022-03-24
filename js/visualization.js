@@ -11,6 +11,8 @@ const svg1 = d3.select("#vis-holder")
 // Plotting 
 d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
+  console.log(data[0]);
+
   let x1;
   let xKey1;
   
