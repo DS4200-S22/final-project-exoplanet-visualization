@@ -8,6 +8,12 @@ const svg1 = d3.select("#vis-container")
                 .attr("height", height - margin.top - margin.bottom)
                 .attr("viewBox", [0, 0, width, height]); 
 
+const svg2 = d3.select("#vis-container")
+                .append("svg")
+                .attr("width", width - margin.left - margin.right)
+                .attr("height", height - margin.top - margin.bottom)
+                .attr("viewBox", [0, 0, width, height]); 
+
 // Plotting 
 d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
@@ -99,7 +105,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         .range([margin.left, width-margin.right]); 
 
     // Add x axis 
-    svg1.append("g")
+    svg2.append("g")
         .attr("transform", `translate(0,${height - margin.bottom})`) 
         .call(d3.axisBottom(x2))   
         .attr("font-size", '20px')
@@ -121,7 +127,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         .range([height - margin.bottom, margin.top]); 
 
     // Add y axis 
-    svg1.append("g")
+    svg2.append("g")
         .attr("transform", `translate(${margin.left}, 0)`) 
         .call(d3.axisLeft(y2)) 
         .attr("font-size", '20px') 
