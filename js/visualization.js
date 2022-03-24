@@ -139,7 +139,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .text(yKey2));
 
     // Add points
-    var myCircles1 = svg1.append('g')
+    var myCircles2 = svg2.append('g')
         .selectAll("circle")
         .data(data)
         .enter()
