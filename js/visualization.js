@@ -28,7 +28,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
     // Find max x
     let maxX1 = d3.max(data, (d) => { return d[xKey1]; });
 
-    console.log("Max X1: ", maxX1[i]);
+    console.log("Max X1: ", maxX1);
     // Create X scale
     x1 = d3.scaleLinear()
         .domain([0,maxX1])
