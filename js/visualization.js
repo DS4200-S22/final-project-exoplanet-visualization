@@ -2,7 +2,7 @@ const margin = { top: 50, right: 50, bottom: 50, left: 50 };
 const width = 900; 
 const height = 650; 
 
-const svg1 = d3.select("#vis-holder")
+const svg1 = d3.select("#vis-container")
                 .append("svg")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
@@ -29,6 +29,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
     let maxX1 = d3.max(data, (d) => { return d[xKey1]; });
 
     console.log("Max X1: ", maxX1);
+
     // Create X scale
     x1 = d3.scaleLinear()
         .domain([0,maxX1])
@@ -48,6 +49,8 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
     // Finx max y 
     let maxY1 = d3.max(data, (d) => { return d[yKey1]; });
+
+    console.log("Max Y1: ", maxY1);
 
     // Create Y scale
     y1 = d3.scaleLinear()
