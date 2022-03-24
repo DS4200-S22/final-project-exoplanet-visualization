@@ -16,8 +16,8 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
   }
   
 
-  let x1;
-  let xKey1;
+  let x1, x2;
+  let xKey1, xKey2;
   
   // Plot 1
   {
@@ -42,7 +42,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         .attr("font-size", '20px')
         .call((g) => g.append("text")
             .attr("x", width - margin.right)
-            .attr("y", margin.bottom - 4)
+            .attr("y", margin.bottom)
             .attr("fill", "black")
             .attr("text-anchor", "end")
             .text(xKey1));
@@ -82,6 +82,69 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .style("fill", "blue")
             .style("opacity", 0.5);
   } 
+
+  // Plot 2
+  {
+    xKey2 = "mass"
+    yKey2 = "eccentricity"
+
+    // Find max x
+    let maxX2 = d3.max(data, (d) => { return d[xKey2]; });
+
+    console.log("Max X2: ", maxX2);
+
+    // Create X scale
+    x2 = d3.scaleLinear()
+        .domain([0,maxX2])
+        .range([margin.left, width-margin.right]); 
+
+    // Add x axis 
+    svg1.append("g")
+        .attr("transform", `translate(0,${height - margin.bottom})`) 
+        .call(d3.axisBottom(x2))   
+        .attr("font-size", '20px')
+        .call((g) => g.append("text")
+            .attr("x", width - margin.right)
+            .attr("y", margin.bottom)
+            .attr("fill", "black")
+            .attr("text-anchor", "end")
+            .text(xKey2));
+
+    // Finx max y 
+    let maxY2 = d3.max(data, (d) => { return d[yKey2]; });
+
+    console.log("Max Y2: ", maxY2);
+
+    // Create Y scale
+    y2 = d3.scaleLinear()
+        .domain([0, maxY2])
+        .range([height - margin.bottom, margin.top]); 
+
+    // Add y axis 
+    svg1.append("g")
+        .attr("transform", `translate(${margin.left}, 0)`) 
+        .call(d3.axisLeft(y2)) 
+        .attr("font-size", '20px') 
+        .call((g) => g.append("text")
+            .attr("x", 0)
+            .attr("y", margin.top)
+            .attr("fill", "black")
+            .attr("text-anchor", "end")
+            .text(yKey2));
+
+    // Add points
+    var myCircles1 = svg1.append('g')
+        .selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+            .attr("id", (d) => d.name)
+            .attr("cx", (d) => x1(d[xKey2]))
+            .attr("cy", (d) => y1(d[yKey2]))
+            .attr("r", 8)
+            .style("fill", "blue")
+            .style("opacity", 0.5);
+  }
   
           
 
