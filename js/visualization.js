@@ -37,7 +37,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
     // Add x axis 
     svg1.append("g")
-        .attr("transform", `translate(0,${height - margin.bottom})`) 
+        .attr("transform", `translate(0,${height})`) 
         .call(d3.axisBottom(x1))   
         .attr("font-size", '20px')
         .call((g) => g.append("text")
