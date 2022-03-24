@@ -11,7 +11,7 @@ const svg1 = d3.select("#vis-holder")
 // Plotting 
 d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
-  for (let i = 0; i < data.length; i++) { 
+  for (let i = 0; i < 10; i++) { 
     console.log(data[i]);
   }
   
@@ -28,6 +28,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
     // Find max x
     let maxX1 = d3.max(data, (d) => { return d[xKey1]; });
 
+    console.log("Max X1: ", maxX1[i]);
     // Create X scale
     x1 = d3.scaleLinear()
         .domain([0,maxX1])
