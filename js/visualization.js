@@ -96,7 +96,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .style("opacity", 0.5);
 
         // Function that is triggered when brushing is performed
-        function updateChart() {
+        function updateChart1() {
             extent = d3.event.selection
             myCircles1.classed("selected", function(d){ return isBrushed(extent, x1(d.radius), y1(d.eccentricity))})
         }
