@@ -89,14 +89,14 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .style("fill", "blue")
                 .style("opacity", 0.5);
 
-        //Define a brush (call it brush1)
-        let brush1 = d3.brush()
-            .extent([[0, 0], [width + margin.left + margin.right, height + margin.top + margin.bottom]]);
+        // //Define a brush (call it brush1)
+        // let brush1 = d3.brush()
+        //     .extent([[0, 0], [width + margin.left + margin.right, height + margin.top + margin.bottom]]);
     
-        //Add brush1 to svg1
-        svg1.call(d3.brush(brush1)
-            .on("brush", updateChart1))
-            .on("start", clear);
+        // //Add brush1 to svg1
+        // svg1.call(d3.brush(brush1)
+        //     .on("brush", updateChart1))
+        //     .on("start", clear);
 
              
     } 
@@ -163,36 +163,36 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .style("fill", "blue")
                 .style("opacity", 0.5);
 
-        //Define a brush 
-        let brush2 = d3.brush()
-            .extent([[0,0], [width + margin.left + margin.right, height + margin.top + margin.bottom]]);
+        // //Define a brush 
+        // let brush2 = d3.brush()
+        //     .extent([[0,0], [width + margin.left + margin.right, height + margin.top + margin.bottom]]);
     
-        //Add brush2 to svg2
-        svg2.call(d3.brush(brush2)
-          .on("brush", updateChart2)
-          .on("start", clear));  
+        // //Add brush2 to svg2
+        // svg2.call(d3.brush(brush2)
+        //   .on("brush", updateChart2)
+        //   .on("start", clear));  
 
-        // Call when Scatterplot2 is brushed 
-        function updateChart2(brushEvent) {
-            extent = brushEvent.selection;
-            selected_planets = new Set();
+        // // Call when Scatterplot2 is brushed 
+        // function updateChart2(brushEvent) {
+        //     extent = brushEvent.selection;
+        //     selected_planets = new Set();
             
-            myCircles1.classed("selected", function(d){ return isBrushed(extent, x2(d.mass), y2(d.eccentricity) ) } );
-            myCircles2.classed("selected", function(d){ is_selected = isBrushed(extent, x2(d.mass), y2(d.eccentricity));
-                if(is_selected){
-                    selected_planets.add(d.name);
-                }
-                return is_selected;});   
-        }
+        //     myCircles1.classed("selected", function(d){ return isBrushed(extent, x2(d.mass), y2(d.eccentricity) ) } );
+        //     myCircles2.classed("selected", function(d){ is_selected = isBrushed(extent, x2(d.mass), y2(d.eccentricity));
+        //         if(is_selected){
+        //             selected_planets.add(d.name);
+        //         }
+        //         return is_selected;});   
+        // }
 
-        // A function that return TRUE or FALSE according if a dot is in the selection or not
-        function isBrushed(brush_coords, cx, cy) {
-            var x0 = brush_coords[0][0],
-                x1 = brush_coords[1][0],
-                y0 = brush_coords[0][1],
-                y1 = brush_coords[1][1];
-            return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;
-        }
+        // // A function that return TRUE or FALSE according if a dot is in the selection or not
+        // function isBrushed(brush_coords, cx, cy) {
+        //     var x0 = brush_coords[0][0],
+        //         x1 = brush_coords[1][0],
+        //         y0 = brush_coords[0][1],
+        //         y1 = brush_coords[1][1];
+        //     return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;
+        // }
     }
   
           
