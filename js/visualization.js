@@ -6,7 +6,9 @@ const svg1 = d3.select("#vis-container")
                 .append("svg")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
-                .attr("viewBox", [0, 0, width, height]); 
+                .attr("viewBox", [0, 0, width, height])
+                .call( d3.brush() 
+                    .extent([[0,0], [width - margin.left - margin.right, height - margin.top - margin.bottom]])); 
 
 const svg2 = d3.select("#vis-container")
                 .append("svg")
