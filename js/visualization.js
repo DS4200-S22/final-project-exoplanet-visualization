@@ -6,10 +6,8 @@ const svg1 = d3.select("#vis-container")
                 .append("svg")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
-                .attr("viewBox", [0, 0, width, height])
-                .call( d3.brush() 
-                    .extent([[margin.left, margin.top], [width + margin.left, height + margin.top ]]))
-                    .on("start end", updateChart1); 
+                .attr("viewBox", [0, 0, width, height]);
+                 
 
 const svg2 = d3.select("#vis-container")
                 .append("svg")
@@ -48,6 +46,11 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .domain([0,maxX1])
             .range([margin.left, width-margin.right]); 
 
+        // Add brushing 
+        svg1.call( d3.brush() 
+            .extent([[margin.left, margin.top], [width + margin.left, height + margin.top ]]))
+            .on("start end", updateChart1);
+
         // Add x axis 
         svg1.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`) 
@@ -59,6 +62,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
                 .text(xKey1));
+
 
         // Finx max y 
         let maxY1 = d3.max(data, (d) => { return d[yKey1]; });
