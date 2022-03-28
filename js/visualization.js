@@ -8,7 +8,8 @@ const svg1 = d3.select("#vis-container")
                 .attr("height", height - margin.top - margin.bottom)
                 .attr("viewBox", [0, 0, width, height])
                 .call( d3.brush() 
-                    .extent([[margin.left, margin.top], [width + margin.left, height + margin.top ]])); 
+                    .extent([[margin.left, margin.top], [width + margin.left, height + margin.top ]]))
+                    .on("start end", updateChart1); 
 
 const svg2 = d3.select("#vis-container")
                 .append("svg")
@@ -16,7 +17,8 @@ const svg2 = d3.select("#vis-container")
                 .attr("height", height - margin.top - margin.bottom)
                 .attr("viewBox", [0, 0, width, height])
                 .call( d3.brush() 
-                    .extent([[margin.left, margin.top], [width + margin.left, height + margin.top ]])); 
+                    .extent([[margin.left, margin.top], [width + margin.left, height + margin.top ]]));
+                    //.on("start end", updateChart2); 
 
 // Plotting 
 d3.csv("data/cleanedExoplanetData.csv").then((data) => {
@@ -92,6 +94,20 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("r", 8)
                 .style("fill", "blue")
                 .style("opacity", 0.5);
+
+        // Function that is triggered when brushing is performed
+        function updateChart() {
+            extent = d3.event.selection
+            myCircles1.classed("selected", function(d){ return isBrushed(extent, x1(d.radius), y1(d.eccentricity))})
+        }
+
+        function isBrushed(brush_coords, cx, cy) {
+            var x0 = brush_coords[0][0],
+                x1 = brush_coords[1][0],
+                y0 = brush_coords[0][1],
+                y1 = brush_coords[1][1];
+            return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;    // This return TRUE or FALSE depending on if the points is in the selected area
+  }
 
         // //Define a brush (call it brush1)
         // let brush1 = d3.brush()
@@ -197,8 +213,4 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         //         y1 = brush_coords[1][1];
         //     return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;
         // }
-    }
-  
-          
-
-})                
+    }})                
