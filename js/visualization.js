@@ -14,7 +14,9 @@ const svg2 = d3.select("#vis-container")
                 .append("svg")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
-                .attr("viewBox", [0, 0, width, height]); 
+                .attr("viewBox", [0, 0, width, height])
+                .call( d3.brush() 
+                    .extent([[margin.left, margin.top], [width + margin.left, height + margin.top ]])); 
 
 // Plotting 
 d3.csv("data/cleanedExoplanetData.csv").then((data) => {
