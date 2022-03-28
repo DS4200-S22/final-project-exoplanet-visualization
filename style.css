@@ -21,3 +21,10 @@ h1, h2, h3 {
   height: 100%;
 }
 
+
+circles.selected {
+  opacity: .5;
+  stroke:  black;
+  stroke-width: 3px;
+}
+
