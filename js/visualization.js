@@ -89,6 +89,15 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .style("fill", "blue")
                 .style("opacity", 0.5);
 
+        //Define a brush (call it brush1)
+        let brush1 = d3.brush()
+            .extent([[0, 0], [width + margin.left + margin.right, height + margin.top + margin.bottom]]);
+    
+        //Add brush1 to svg1
+        svg1.call(d3.brush(brush1)
+            .on("brush", updateChart1))
+            .on("start", clear);
+
              
     } 
 
