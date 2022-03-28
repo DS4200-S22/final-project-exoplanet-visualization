@@ -24,7 +24,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
   let x1, x2, y1, y2;
   let xKey1, xKey2;
-  let brush1;
+  let brush1, brush2;
   
     // Plot 1
     {
