@@ -46,6 +46,11 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .domain([0,maxX1])
             .range([margin.left, width-margin.right]); 
 
+        // Add brushing 
+        svg1.call( d3.brush() 
+            .extent([[margin.left, margin.top], [width + margin.left, height + margin.top ]]))
+            .on("start end", updateChart1);
+
         // Add x axis 
         svg1.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`) 
@@ -57,9 +62,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
                 .text(xKey1));
-            .call( d3.brush() 
-                    .extent([[margin.left, margin.top], [width + margin.left, height + margin.top ]]))
-                    .on("start end", updateChart1);
+
 
         // Finx max y 
         let maxY1 = d3.max(data, (d) => { return d[yKey1]; });
