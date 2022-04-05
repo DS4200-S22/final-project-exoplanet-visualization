@@ -20,10 +20,6 @@ const svg2 = d3.select("#vis-container")
 
 // Plotting 
 d3.csv("data/cleanedExoplanetData.csv").then((data) => {
-
-  for (let i = 0; i < 10; i++) { 
-    console.log(data[i]);
-  }
   
 
   let x1, x2, y1, y2;
