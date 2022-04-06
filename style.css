@@ -18,13 +18,12 @@ h1, h2, h3 {
 /* Full-width and Full-height */
 .vis-holder {
   width: 100%;
-  height: 100%;
-}
+  height: 100%;}
 
 
-circles.selected {
-  opacity: .5;
+.selected {
+  opacity: 1 !important;
   stroke:  black;
-  stroke-width: 3px;
+  stroke-width: 4px;
 }
 
