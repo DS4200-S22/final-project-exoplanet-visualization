@@ -22,7 +22,7 @@ h1, h2, h3 {
 
 
 .selected {
-	background: red;
+	fill: red;
   	opacity: 1 !important;
   	stroke:  black;
   	stroke-width: 4px;
