@@ -310,17 +310,17 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                  
     }  
 
-            // initialize the brush for the second scatterplot
-        brush2 = d3.brush().extent([[0, 0], [width, height]])
+    // initialize the brush for the second scatterplot
+    brush2 = d3.brush().extent([[0, 0], [width, height]])
         
-        // call the second brush on the second scatterplot
-        svg2.call(brush2
-                .on("start", clear)
-                .on("brush", updateChart2)
-        );
-    }
+    // call the second brush on the second scatterplot
+    svg2.call(brush2
+            .on("start", clear)
+            .on("brush", updateChart2)
+    );
 
-     // Call to remove existing brushes 
+
+    // Call to remove existing brushes 
     function clear() {
         svg1.call(brush1.move, null);
         svg2.call(brush2.move, null);
