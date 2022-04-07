@@ -320,8 +320,8 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .call(d3.axisLeft(y4)) 
             .attr("font-size", '20px') 
             .call((g) => g.append("text")
-                .attr("x", 0)
-                .attr("y", margin.top + 10)
+                .attr("x", 100)
+                .attr("y", margin.top)
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
                 .text("frequency"));
