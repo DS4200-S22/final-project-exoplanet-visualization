@@ -47,8 +47,6 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         // Find max x
         let maxX1 = d3.max(data, (d) => { return d[xKey1]; });
 
-        console.log("Max X1: ", maxX1);
-
         // Create X scale
         x1 = d3.scaleLinear()
             .domain([0,maxX1])
@@ -74,8 +72,6 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         // Finx max y 
         let maxY1 = d3.max(data, (d) => { return d[yKey1]; });
-
-        console.log("Max Y1: ", maxY1);
 
         // Create Y scale
         y1 = d3.scaleLinear()
@@ -131,8 +127,6 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         // Find max x
         let maxX2 = d3.max(data, (d) => { return d[xKey2]; });
 
-        console.log("Max X2: ", maxX2);
-
         // Create X scale
         x2 = d3.scaleLinear()
             .domain([0,maxX2])
@@ -152,8 +146,6 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         // Finx max y 
         let maxY2 = d3.max(data, (d) => { return d[yKey2]; });
-
-        console.log("Max Y2: ", maxY2);
 
         // Create Y scale
         y2 = d3.scaleLinear()
@@ -210,10 +202,6 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             }
         })
 
-        // console.log(medians)
-        // console.log(medians[0].dataPoints)
-        // console.log(medians.length)
-
         // Create y scale   
         let y3 = d3.scaleLinear()
             .domain([0,maxY3])
@@ -248,16 +236,6 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
                 .text("frequency"));
-
-        // for (i = 0; i < medians.length; i++){            
-        //     dataP = medians[i].dataPoints;
-        //     medianM = medians[i].medianMass;
-            
-        //     console.log("medians[" + i + "]: ");
-        //     console.log("d.dataPoints: " + dataP);
-        //     console.log("d.medianMass: " + medianM);
-                               
-        // }
            
         bars1 = svg3.selectAll(".bar")
                 .data(medians)
