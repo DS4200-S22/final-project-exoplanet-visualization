@@ -183,7 +183,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
     // Plot 3
     {
-        xKey3 = "Mass"
+        xKey3 = "mass"
 
         // Find max x
         let maxX3 = d3.max(data, (d) => { return d[xKey3]; });
