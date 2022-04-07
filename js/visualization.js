@@ -281,7 +281,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         const thresholdsRadius = d3.range(maxX4 + .0001)
         const binnerRadius = d3.bin().value(d=>d[xKey4]).thresholds(thresholdsRadius).domain([0,maxX4])
-        const binnedRadius = binner(data)
+        const binnedRadius = binnerRadius(data)
         const mediansRadius = binned.map(bin => {
             return {
                 medianRadius: d3.median(bin, b=>b[xKey4]),
