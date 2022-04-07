@@ -256,7 +256,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         //for (i = 0; i < 
         // Bars
         svg3.selectAll("mybar")
-            .data(medians[i])
+            .data(medians)
             .enter()
             .append("rect")
                 .attr("x", function(d) { return x3(d.dataPoints); })
