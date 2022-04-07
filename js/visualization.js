@@ -213,7 +213,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         console.log(medians)
 
-        console.log(medians[0].length)
+        console.log(medians[0].dataPoints)
 
         //console.log(len(medians))
         
