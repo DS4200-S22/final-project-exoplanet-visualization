@@ -255,10 +255,10 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         // Find max x
         let maxX4 = d3.max(data, (d) => { return d[xKey4]; });
-        for(i = 0; i < data.length; i++){
-            console.log(data[i][xKey4])
-        }
-        console.log("maxX4: " + maxX4)
+        // for(i = 0; i < data.length; i++){
+        //     console.log(data[i][xKey4])
+        // }
+        // console.log("maxX4: " + maxX4)
 
         const thresholdsRadius = d3.range(maxX4)
         const binnerRadius = d3.bin().value(d=>d[xKey4]).thresholds(thresholdsRadius).domain([0,maxX4])
