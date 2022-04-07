@@ -264,8 +264,10 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                     .attr("width", x3.bandwidth())
                     .attr("height", function(d) { return height - y3(maxY3); })
                     .attr("fill", "#69b3a2")
-            console.log("i: " + i + '\n' +
-                        "should have added a bar?");        
+            console.log("medians[" + i + "]: ");
+            console.log("d.dataPoints: " + d.dataPoints);
+            console.log("d.medianMass: " + d.medianMass);
+                               
         }
             
 
