@@ -220,13 +220,6 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .domain(d3.range(medians.length))
             .range([margin.left, width - margin.right])
             .padding(0.1); 
-        
-        //  // Add x axis 
-        // svg3.append("g")
-        //     .attr("transform", `translate(0,${height - margin.bottom})`) 
-        //     .call(d3.axisBottom(x3) 
-        //         .tickFormat(i => i))  
-        //         .attr("font-size", '20px');
 
         // Add x axis 
         svg3.append("g")
@@ -261,7 +254,17 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             console.log("d.medianMass: " + medianM);
                                
         }
-            
+           
+        myBars = svg3.selectAll(".bar")
+                .data(medians)
+                .enter()
+                .append("rect") 
+                 .attr("class", "bar") 
+                 .attr("x", (d,i) => x3(i)) 
+                 .attr("y", (d) => y3(maxY3)) 
+                 .attr("height", (d) => height - margin.bottom - (y3(maxY3))) 
+                 .attr("width", x3.bandwidth())
+                 .style("fill", "green")    
         // Bars
             // svg3.selectAll("mybar")
             //     .data(medians[i])
