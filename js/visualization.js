@@ -215,6 +215,8 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         console.log(medians[0].dataPoints)
 
+        console.log(medians.length)
+
         //console.log(len(medians))
         
         // Add x axis 
@@ -251,10 +253,10 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("text-anchor", "end")
                 .text("frequency"));
 
-        
+        //for (i = 0; i < 
         // Bars
         svg3.selectAll("mybar")
-            .data(medians)
+            .data(medians[i])
             .enter()
             .append("rect")
                 .attr("x", function(d) { return x3(d.dataPoints); })
