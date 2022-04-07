@@ -193,7 +193,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         const thresholds = d3.range(maxX3 + 1)
 
         // Create x scale
-        x3 = d3.scaleLinear()
+        x3 = d3.scaleBand()
             .domain([0,maxX3])
             .range([margin.left, width-margin.right]);
 
@@ -251,18 +251,18 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("text-anchor", "end")
                 .text("frequency"));
 
-        /*
+        
         // Bars
         svg3.selectAll("mybar")
             .data(medians)
             .enter()
             .append("rect")
-                .attr("x", function(d) { return x3(length(medians)); })
+                .attr("x", function(d) { return x3(medians[d].dataPoints); })
                 .attr("y", function(d) { return y3(d.Value); })
                 .attr("width", x3.bandwidth())
                 .attr("height", function(d) { return height - y3(maxY3); })
                 .attr("fill", "#69b3a2")    
 
-        */
+        
     }
 })                
