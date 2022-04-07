@@ -17,14 +17,26 @@ const svg2 = d3.select("#vis-container")
                 .attr("viewBox", [0, 0, width, height])
                 .call( d3.brush() 
                     .extent([[margin.left, margin.top], [width + margin.left, height + margin.top ]]));
+
+const svg3 = d3.select("#vis-container")
+                .append("svg")
+                .attr("width", width - margin.left - margin.right)
+                .attr("height", height - margin.top - margin.bottom)
+                .attr("viewBox", [0, 0, width, height])
+
+const svg4 = d3.select("#vis-container")
+                .append("svg")
+                .attr("width", width - margin.left - margin.right)
+                .attr("height", height - margin.top - margin.bottom)
+                .attr("viewBox", [0, 0, width, height])
                     
 
 // Plotting 
 d3.csv("data/cleanedExoplanetData.csv").then((data) => {
+
+  let x1, x2, x3, y1, y2, y3;
+  let xKey1, yKey1, xKey2, yKey2, xKey3;
   
-  // defines all global constants in plotting
-  let x1, x2, y1, y2;
-  let xKey1, yKey1, xKey2, yKey2;
   let brush1, brush2;
   let myCircles1, myCircles2;
   
@@ -155,8 +167,150 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("r", 8)
                 .style("fill", "blue") // TODO: ADD COLORS
                 .style("opacity", 0.5);
+    }
 
-        // initialize the brush for the second scatterplot
+    // Plot 3
+    {
+        xKey3 = "mass"
+
+        // Find max x
+        let maxX3 = d3.max(data, (d) => { return d[xKey3]; });
+
+        // Finx max y 
+        let maxY3 = 76;
+
+        const thresholds = d3.range(maxX3 + 1)
+        const binner = d3.bin().value(d=>d[xKey3]).thresholds(thresholds).domain([0,maxX3])
+        const binned = binner(data)
+        const medians = binned.map(bin => {
+            return {
+                medianMass: d3.median(bin, b=>b[xKey3]),
+                dataPoints: bin.length,
+                bucketMin: bin.x0,
+                bucketMax: bin.x1
+
+            }
+        })
+
+        // Create y scale   
+        let y3 = d3.scaleLinear()
+            .domain([0,maxY3])
+            .range([height-margin.bottom,margin.top]); 
+
+        // Create x scale
+        let x3 = d3.scaleBand()
+            .domain(d3.range(medians.length))
+            .range([margin.left, width - margin.right])
+            .padding(0.1); 
+
+        // Add x axis 
+        svg3.append("g")
+            .attr("transform", `translate(0,${height - margin.bottom})`) 
+            .call(d3.axisBottom(x3))   
+            .attr("font-size", '20px')
+            .call((g) => g.append("text")
+                .attr("x", width - margin.right)
+                .attr("y", margin.bottom)
+                .attr("fill", "black")
+                .attr("text-anchor", "end")
+                .text(xKey3)); 
+
+        // Add y axis 
+        svg3.append("g")
+            .attr("transform", `translate(${margin.left}, 0)`) 
+            .call(d3.axisLeft(y3)) 
+            .attr("font-size", '20px') 
+            .call((g) => g.append("text")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("fill", "black")
+                .attr("text-anchor", "end")
+                .text("frequency"));
+           
+        bars1 = svg3.selectAll(".bar")
+                .data(medians)
+                .enter()
+                .append("rect") 
+                 .attr("class", "bar") 
+                 .attr("x", (d,i) => x3(i)) 
+                 .attr("y", (d) => y3(d.dataPoints)) 
+                 .attr("height", (d) => height - margin.bottom - (y3(d.dataPoints)))  
+                 .attr("width", x3.bandwidth())
+                 .style("fill", "green")      
+    }
+
+    // Plot 4 
+    {
+        xKey4 = "radius"
+
+        // Find max x
+        let maxX4 = d3.max(data, (d) => { return d[xKey4]; });
+
+        const thresholdsRadius = d3.range(maxX4)
+        const binnerRadius = d3.bin().value(d=>d[xKey4]).thresholds(thresholdsRadius).domain([0,maxX4])
+        const binnedRadius = binnerRadius(data)
+        const mediansRadius = binnedRadius.map(bin => {
+            return {
+                medianRadius: d3.median(bin, b=>b[xKey4]),
+                dataPoints: bin.length,
+                bucketMin: bin.x0,
+                bucketMax: bin.x1
+
+            }
+        })
+
+        // Find max y 
+        let maxY4 = 110;
+
+        // Create y scale   
+        let y4 = d3.scaleLinear()
+            .domain([0,maxY4])
+            .range([height-margin.bottom,margin.top]); 
+
+        // Create x scale
+        let x4 = d3.scaleBand()
+            .domain(d3.range(mediansRadius.length))
+            .range([margin.left, width - margin.right])
+            .padding(0.1); 
+
+        // Add x axis 
+        svg4.append("g")
+            .attr("transform", `translate(0,${height - margin.bottom})`) 
+            .call(d3.axisBottom(x4))   
+            .attr("font-size", '20px')
+            .call((g) => g.append("text")
+                .attr("x", width - margin.right)
+                .attr("y", margin.bottom)
+                .attr("fill", "black")
+                .attr("text-anchor", "end")
+                .text(xKey4)); 
+
+        // Add y axis 
+        svg4.append("g")
+            .attr("transform", `translate(${margin.left}, 0)`) 
+            .call(d3.axisLeft(y4)) 
+            .attr("font-size", '20px') 
+            .call((g) => g.append("text")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("fill", "black")
+                .attr("text-anchor", "end")
+                .text("frequency"));
+           
+        bars2 = svg4.selectAll(".bar")
+                .data(mediansRadius)
+                .enter()
+                .append("rect") 
+                 .attr("class", "bar") 
+                 .attr("x", (d,i) => x4(i)) 
+                 .attr("y", (d) => y4(d.dataPoints)) 
+                 .attr("height", (d) => height - margin.bottom - (y4(d.dataPoints)))  
+                 .attr("width", x4.bandwidth())
+                 .style("fill", "green") 
+                 
+    }  
+
+            // initialize the brush for the second scatterplot
         brush2 = d3.brush().extent([[0, 0], [width, height]])
         
         // call the second brush on the second scatterplot
@@ -214,5 +368,6 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
       y0 = brush_coords[0][1],
       y1 = brush_coords[1][1];
     return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1; // This return TRUE or FALSE depending on if the points is in the selected area
-    }
-});                
+  }
+}); 
+
