@@ -203,7 +203,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         const medians = binned.map(bin => {
             return {
-                medianMass: d3.median(bin, b=>b.[xKey3]),
+                medianMass: d3.median(bin, b=>b[xKey3]),
                 dataPoints: bin.length,
                 bucketMin: bin.x0,
                 bucketMax: bin.x1
