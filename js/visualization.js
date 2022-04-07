@@ -262,7 +262,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                  .attr("class", "bar") 
                  .attr("x", (d,i) => x3(i)) 
                  .attr("y", (d) => height - y3(maxY3)) 
-                 .attr("height", (d) => y3(d.dataPoints)) 
+                 .attr("height", (d) => -y3(d.dataPoints)) 
                  .attr("width", x3.bandwidth())
                  .style("fill", "green")    
         // Bars
