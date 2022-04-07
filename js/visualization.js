@@ -290,7 +290,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         // console.log("MR Data Points " + mediansRadius[0].dataPoints)
         // console.log("MR Length " + mediansRadius.length)
 
-        /*
+        
         // Create y scale   
         let y4 = d3.scaleLinear()
             .domain([0,maxY4])
@@ -346,6 +346,6 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                  .attr("height", (d) => height - margin.bottom - (y4(d.dataPoints)))  
                  .attr("width", x4.bandwidth())
                  .style("fill", "green") 
-        */         
+                 
     }
 })                
