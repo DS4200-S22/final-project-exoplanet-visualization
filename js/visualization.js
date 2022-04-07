@@ -212,6 +212,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         })
 
         console.log(medians)
+        console.log(length(medians))
         
         // Add x axis 
         svg3.append("g")
@@ -247,6 +248,18 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("text-anchor", "end")
                 .text("frequency"));
 
-        
+        /*
+        // Bars
+        svg3.selectAll("mybar")
+            .data(medians)
+            .enter()
+            .append("rect")
+                .attr("x", function(d) { return x3(length(medians)); })
+                .attr("y", function(d) { return y3(d.Value); })
+                .attr("width", x3.bandwidth())
+                .attr("height", function(d) { return height - y3(maxY3); })
+                .attr("fill", "#69b3a2")    
+
+        */
     }
 })                
