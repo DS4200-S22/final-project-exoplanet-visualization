@@ -210,9 +210,9 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             }
         })
 
-        console.log(medians)
-        console.log(medians[0].dataPoints)
-        console.log(medians.length)
+        // console.log(medians)
+        // console.log(medians[0].dataPoints)
+        // console.log(medians.length)
 
         // Create y scale   
         let y3 = d3.scaleLinear()
@@ -249,15 +249,15 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("text-anchor", "end")
                 .text("frequency"));
 
-        for (i = 0; i < medians.length; i++){            
-            dataP = medians[i].dataPoints;
-            medianM = medians[i].medianMass;
+        // for (i = 0; i < medians.length; i++){            
+        //     dataP = medians[i].dataPoints;
+        //     medianM = medians[i].medianMass;
             
-            console.log("medians[" + i + "]: ");
-            console.log("d.dataPoints: " + dataP);
-            console.log("d.medianMass: " + medianM);
+        //     console.log("medians[" + i + "]: ");
+        //     console.log("d.dataPoints: " + dataP);
+        //     console.log("d.medianMass: " + medianM);
                                
-        }
+        // }
            
         bars1 = svg3.selectAll(".bar")
                 .data(medians)
