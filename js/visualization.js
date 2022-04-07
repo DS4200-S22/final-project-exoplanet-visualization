@@ -213,7 +213,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         console.log(medians)
 
-        console.log(medians.size())
+        console.log(size(medians))
 
         //console.log(len(medians))
         
