@@ -188,19 +188,14 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         // Find max x
         let maxX3 = d3.max(data, (d) => { return d[xKey3]; });
 
-        console.log("Max X3: ", maxX3);
+        // Finx max y 
+        let maxY3 = 76;
+
+        //console.log("Max X3: ", maxX3);
 
         const thresholds = d3.range(maxX3 + 1)
-
-        // Create x scale
-        x3 = d3.scaleBand()
-            .domain([0,maxX3])
-            .range([margin.left, width-margin.right]);
-
         const binner = d3.bin().value(d=>d[xKey3]).thresholds(thresholds).domain([0,maxX3])
-
         const binned = binner(data)
-
         const medians = binned.map(bin => {
             return {
                 medianMass: d3.median(bin, b=>b[xKey3]),
@@ -212,34 +207,38 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         })
 
         console.log(medians)
-
         console.log(medians[0].dataPoints)
-
         console.log(medians.length)
 
-        //console.log(len(medians))
+        // Create y scale   
+        let yScale_bar = d3.scaleLinear()
+            .domain([0,maxY3])
+            .range([height-margin.bottom,margin.top]); 
+
+        // Create x scale
+        let xScale_bar = d3.scaleBand()
+            .domain(d3.range(medians.length))
+            .range([margin.left, width - margin.right])
+            .padding(0.1); 
         
-        // Add x axis 
+         // Add x axis 
         svg3.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`) 
-            .call(d3.axisBottom(x3))   
-            .attr("font-size", '20px')
-            .call((g) => g.append("text")
-                .attr("x", width - margin.right)
-                .attr("y", margin.bottom)
-                .attr("fill", "black")
-                .attr("text-anchor", "end")
-                .text(xKey3));
+            .call(d3.axisBottom(x3) 
+                .tickFormat(i => i))  
+                .attr("font-size", '20px');
 
-        // Finx max y 
-        let maxY3 = 76;
-
-        console.log("Max Y3: ", maxY3);
-
-        // Create Y scale
-        y3 = d3.scaleLinear()
-            .domain([0, maxY3])
-            .range([height - margin.bottom, margin.top]); 
+        // // Add x axis 
+        // svg3.append("g")
+        //     .attr("transform", `translate(0,${height - margin.bottom})`) 
+        //     .call(d3.axisBottom(x3))   
+        //     .attr("font-size", '20px')
+        //     .call((g) => g.append("text")
+        //         .attr("x", width - margin.right)
+        //         .attr("y", margin.bottom)
+        //         .attr("fill", "black")
+        //         .attr("text-anchor", "end")
+        //         .text(xKey3)); 
 
         // Add y axis 
         svg3.append("g")
@@ -253,8 +252,17 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("text-anchor", "end")
                 .text("frequency"));
 
-        for (i = 0; i < medians.length; i++){
-            // Bars
+        for (i = 0; i < medians.length; i++){            
+            dataP = medians[i].dataPoints;
+            medianM = medians[i].medianMass;
+            
+            console.log("medians[" + i + "]: ");
+            console.log("d.dataPoints: " + dataP);
+            console.log("d.medianMass: " + medianM);
+                               
+        }
+            
+        // Bars
             // svg3.selectAll("mybar")
             //     .data(medians[i])
             //     .enter()
@@ -264,18 +272,6 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             //         .attr("width", x3.bandwidth())
             //         .attr("height", function(d) { return height - y3(maxY3); })
             //         .attr("fill", "#69b3a2")
-            
-            console.log("medians[" + i + "]: ");
-            
-            dataP = medians[i].dataPoints;
-            medianM = medians[i].medianMass;
-            
-            console.log("d.dataPoints: " + dataP);
-            console.log("d.medianMass: " + medianM);
-                               
-        }
-            
-
         
     }
 })                
