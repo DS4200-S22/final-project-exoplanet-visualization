@@ -279,7 +279,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         let maxX4 = d3.max(data, (d) => { return d[xKey4]; });
         console.log("maxX4: " + maxX4)
 
-        const thresholds = d3.range(maxX4 + .03)
+        const thresholds = d3.range(maxX4 + .00001)
         const binner = d3.bin().value(d=>d[xKey4]).thresholds(thresholds).domain([0,maxX4])
         const binned = binner(data)
         const mediansRadius = binned.map(bin => {
@@ -294,7 +294,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         // Find max y 
         let maxY4 = mediansRadius.length;
-        
+
         for (i = 0; i < mediansRadius.length; i++){            
             dataP = mediansRadius[i].dataPoints;
             medianR = mediansRadius[i].medianRadius;
