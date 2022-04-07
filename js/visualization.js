@@ -255,18 +255,21 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         for (i = 0; i < medians.length; i++){
             // Bars
-            svg3.selectAll("mybar")
-                .data(medians[i])
-                .enter()
-                .append("rect")
-                    .attr("x", function(d) { return x3(d.dataPoints); })
-                    .attr("y", function(d) { return y3(d.medianMass); })
-                    .attr("width", x3.bandwidth())
-                    .attr("height", function(d) { return height - y3(maxY3); })
-                    .attr("fill", "#69b3a2")
+            // svg3.selectAll("mybar")
+            //     .data(medians[i])
+            //     .enter()
+            //     .append("rect")
+            //         .attr("x", function(d) { return x3(d.dataPoints); })
+            //         .attr("y", function(d) { return y3(d.medianMass); })
+            //         .attr("width", x3.bandwidth())
+            //         .attr("height", function(d) { return height - y3(maxY3); })
+            //         .attr("fill", "#69b3a2")
+            
             console.log("medians[" + i + "]: ");
-            dataP = function(d) { return x3(d.dataPoints); };
-            medianM = function(d) { return y3(d.medianMass); };
+            
+            dataP = medians[i].dataPoints;
+            medianM = medians[i].medianMass;
+            
             console.log("d.dataPoints: " + dataP);
             console.log("d.medianMass: " + medianM);
                                
