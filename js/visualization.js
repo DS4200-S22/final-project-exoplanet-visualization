@@ -167,6 +167,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("r", 8)
                 .style("fill", "blue") // TODO: ADD COLORS
                 .style("opacity", 0.5);
+        
         // initialize the brush for the second scatterplot
         brush2 = d3.brush().extent([[0, 0], [width, height]])
 
@@ -363,12 +364,12 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
   //Finds dots within the brushed region
   function isBrushed(brush_coords, cx, cy) {
     if (brush_coords == null) return;
-
-    let x0 = brush_coords[0][0],
-      x1 = brush_coords[1][0],
-      y0 = brush_coords[0][1],
-      y1 = brush_coords[1][1];
-    return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1; // This return TRUE or FALSE depending on if the points is in the selected area
+        let x0 = brush_coords[0][0],
+        x1 = brush_coords[1][0],
+        y0 = brush_coords[0][1],
+        y1 = brush_coords[1][1];
+        return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1; // This return TRUE or FALSE depending on if the points is in the selected area
   }
+
 }); 
 
