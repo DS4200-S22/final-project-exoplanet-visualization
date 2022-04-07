@@ -295,9 +295,9 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         })
 
 
-        console.log(mediansRadius)
-        console.log(mediansRadius[0].dataPoints)
-        console.log(mediansRadius.length)
+        console.log("MR " + mediansRadius)
+        console.log("MR Data Points " + mediansRadius[0].dataPoints)
+        console.log("MR Length " + mediansRadius.length)
 
         /*
         // Create y scale   
