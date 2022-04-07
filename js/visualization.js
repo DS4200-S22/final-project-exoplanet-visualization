@@ -28,8 +28,8 @@ const svg3 = d3.select("#vis-container")
 d3.csv("data/cleanedExoplanetData.csv").then((data) => {
   
 
-  let x1, x2, y1, y2;
-  let xKey1, xKey2;
+  let x1, x2, x3, y1, y2, y3;
+  let xKey1, xKey2, xKey3;
   let brush1, brush2;
   
     // Plot 1
@@ -113,7 +113,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 y0 = brush_coords[0][1],
                 y1 = brush_coords[1][1];
             return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;    // This return TRUE or FALSE depending on if the points is in the selected area
-}
+        }
              
     } 
 
@@ -179,4 +179,62 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .style("fill", "blue")
                 .style("opacity", 0.5);
 
-    }})                
+    }
+
+    // Plot 3
+    {
+        xKey3 = "Mass"
+
+        // Find max x
+        let maxX3 = d3.max(data, (d) => { return d[xKey3]; });
+
+        console.log("Max X3: ", maxX3);
+
+        const thresholds = d3.range(maxX3 + 1)
+
+        // Create x scale
+        x3 = d3.scaleLinear()
+            .domain([0,maxX3])
+            .range([margin.left, width-margin.right]);
+
+        const binner = d3.bin().value(d=>d[xKey3]).thresholds(thresholds).domain([0,maxX3])
+
+        const binned = binner(data)
+
+        const medians = binned.map(bin => {
+            return {
+                medianMass: d3.median(bin, b=>b.[xKey3]),
+                dataPoints: bin.length,
+                bucketMin: bin.x0,
+                bucketMax: bin.x1
+
+            }
+        })
+
+        console.log(medians)
+        /*
+        // Add x axis 
+        svg3.append("g")
+            .attr("transform", `translate(0,${height - margin.bottom})`) 
+            .call(d3.axisBottom(x3))   
+            .attr("font-size", '20px')
+            .call((g) => g.append("text")
+                .attr("x", width - margin.right)
+                .attr("y", margin.bottom)
+                .attr("fill", "black")
+                .attr("text-anchor", "end")
+                .text(xKey3));
+
+        
+
+        // set the parameters for the histogram
+        var histogram = d3.histogram()
+            .value(function(d) { return d.mass; })   // I need to give the vector of value
+            .domain(x3.domain())  // then the domain of the graphic
+            .thresholds(x3.ticks(70)); // then the numbers of bins
+        
+        // And apply this function to data to get the bins
+        var bins = histogram(data);
+        */
+    }
+})                
