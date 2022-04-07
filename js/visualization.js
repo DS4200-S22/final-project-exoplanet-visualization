@@ -274,7 +274,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         })
 
         // Find max y 
-        let maxY4 = mediansRadius.length;
+        let maxY4 = 110;
 
         for (i = 0; i < mediansRadius.length; i++){            
             dataP = mediansRadius[i].dataPoints;
