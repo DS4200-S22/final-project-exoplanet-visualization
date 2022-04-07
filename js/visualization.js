@@ -212,7 +212,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         })
 
         console.log(medians)
-        console.log(length(medians))
+        console.log(len(medians))
         
         // Add x axis 
         svg3.append("g")
