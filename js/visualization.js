@@ -212,7 +212,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         })
 
         console.log(medians)
-        /*
+        
         // Add x axis 
         svg3.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`) 
@@ -225,16 +225,28 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("text-anchor", "end")
                 .text(xKey3));
 
-        
+        // Finx max y 
+        let maxY3 = 76;
 
-        // set the parameters for the histogram
-        var histogram = d3.histogram()
-            .value(function(d) { return d.mass; })   // I need to give the vector of value
-            .domain(x3.domain())  // then the domain of the graphic
-            .thresholds(x3.ticks(70)); // then the numbers of bins
+        console.log("Max Y3: ", maxY3);
+
+        // Create Y scale
+        y3 = d3.scaleLinear()
+            .domain([0, maxY3])
+            .range([height - margin.bottom, margin.top]); 
+
+        // Add y axis 
+        svg3.append("g")
+            .attr("transform", `translate(${margin.left}, 0)`) 
+            .call(d3.axisLeft(y3)) 
+            .attr("font-size", '20px') 
+            .call((g) => g.append("text")
+                .attr("x", 0)
+                .attr("y", margin.top)
+                .attr("fill", "black")
+                .attr("text-anchor", "end")
+                .text("frequency"));
+
         
-        // And apply this function to data to get the bins
-        var bins = histogram(data);
-        */
     }
 })                
