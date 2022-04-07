@@ -211,34 +211,34 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         console.log(medians.length)
 
         // Create y scale   
-        let yScale_bar = d3.scaleLinear()
+        let y3 = d3.scaleLinear()
             .domain([0,maxY3])
             .range([height-margin.bottom,margin.top]); 
 
         // Create x scale
-        let xScale_bar = d3.scaleBand()
+        let x3 = d3.scaleBand()
             .domain(d3.range(medians.length))
             .range([margin.left, width - margin.right])
             .padding(0.1); 
         
-         // Add x axis 
-        svg3.append("g")
-            .attr("transform", `translate(0,${height - margin.bottom})`) 
-            .call(d3.axisBottom(x3) 
-                .tickFormat(i => i))  
-                .attr("font-size", '20px');
-
-        // // Add x axis 
+        //  // Add x axis 
         // svg3.append("g")
         //     .attr("transform", `translate(0,${height - margin.bottom})`) 
-        //     .call(d3.axisBottom(x3))   
-        //     .attr("font-size", '20px')
-        //     .call((g) => g.append("text")
-        //         .attr("x", width - margin.right)
-        //         .attr("y", margin.bottom)
-        //         .attr("fill", "black")
-        //         .attr("text-anchor", "end")
-        //         .text(xKey3)); 
+        //     .call(d3.axisBottom(x3) 
+        //         .tickFormat(i => i))  
+        //         .attr("font-size", '20px');
+
+        // Add x axis 
+        svg3.append("g")
+            .attr("transform", `translate(0,${height - margin.bottom})`) 
+            .call(d3.axisBottom(x3))   
+            .attr("font-size", '20px')
+            .call((g) => g.append("text")
+                .attr("x", width - margin.right)
+                .attr("y", margin.bottom)
+                .attr("fill", "black")
+                .attr("text-anchor", "end")
+                .text(xKey3)); 
 
         // Add y axis 
         svg3.append("g")
