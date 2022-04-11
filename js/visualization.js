@@ -63,7 +63,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("y", margin.bottom)
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
-                .text(xKey1));
+                .text("radius (Jupiters)"));
 
 
         // Find max y 
@@ -133,7 +133,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("y", margin.bottom)
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
-                .text(xKey2));
+                .text("mass (Jupiters)"));
 
         // Find max y 
         let maxY2 = d3.max(data, (d) => { return d[yKey2]; });
