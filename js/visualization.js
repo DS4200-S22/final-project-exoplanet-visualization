@@ -162,8 +162,8 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .enter()
             .append("circle")
                 .attr("id", (d) => d.name)
-                .attr("cx", (d) => x1(d[xKey2]))
-                .attr("cy", (d) => y1(d[yKey2]))
+                .attr("cx", (d) => x2(d[xKey2]))
+                .attr("cy", (d) => y2(d[yKey2]))
                 .attr("r", 8)
                 .style("fill", "blue") // TODO: ADD COLORS
                 .style("opacity", 0.5);
