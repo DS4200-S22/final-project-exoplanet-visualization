@@ -58,6 +58,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .attr("transform", `translate(0,${height - margin.bottom})`) 
             .call(d3.axisBottom(x1))   
             .attr("font-size", '20px')
+            .attr("color", "black")
             .call((g) => g.append("text")
                 .attr("x", width - margin.right)
                 .attr("y", margin.bottom)
@@ -79,6 +80,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .attr("transform", `translate(${margin.left}, 0)`) 
             .call(d3.axisLeft(y1)) 
             .attr("font-size", '20px') 
+            .attr("color", "black")
             .call((g) => g.append("text")
                 .attr("x", 0)
                 .attr("y", margin.top)
@@ -117,7 +119,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         // Find max x
         let maxX2 = d3.max(data, (d) => { return d[xKey2]; });
-
+        
         // Create X scale
         x2 = d3.scaleLinear()
             .domain([0,maxX2])
@@ -128,6 +130,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .attr("transform", `translate(0,${height - margin.bottom})`) 
             .call(d3.axisBottom(x2))   
             .attr("font-size", '20px')
+            .attr("color", "black")
             .call((g) => g.append("text")
                 .attr("x", width - margin.right)
                 .attr("y", margin.bottom)
@@ -148,11 +151,12 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .attr("transform", `translate(${margin.left}, 0)`) 
             .call(d3.axisLeft(y2)) 
             .attr("font-size", '20px') 
+            .attr("color", "black")
             .call((g) => g.append("text")
                 .attr("x", 0)
                 .attr("y", margin.top)
                 .attr("fill", "black")
-                .attr("text-anchor", "end")
+                .attr("text-anchor", "middle")
                 .text(yKey2));
 
         // Add points
@@ -217,6 +221,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .attr("transform", `translate(0,${height - margin.bottom})`) 
             .call(d3.axisBottom(x3))   
             .attr("font-size", '20px')
+            .attr("color", "black")
             .call((g) => g.append("text")
                 .attr("x", width - margin.right)
                 .attr("y", margin.bottom)
@@ -229,6 +234,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .attr("transform", `translate(${margin.left}, 0)`) 
             .call(d3.axisLeft(y3)) 
             .attr("font-size", '20px') 
+            .attr("color", "black")
             .call((g) => g.append("text")
                 .attr("x", 0)
                 .attr("y", 0)
@@ -287,6 +293,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .attr("transform", `translate(0,${height - margin.bottom})`) 
             .call(d3.axisBottom(x4))   
             .attr("font-size", '20px')
+            .attr("color", "black")
             .call((g) => g.append("text")
                 .attr("x", width - margin.right)
                 .attr("y", margin.bottom)
@@ -299,6 +306,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             .attr("transform", `translate(${margin.left}, 0)`) 
             .call(d3.axisLeft(y4)) 
             .attr("font-size", '20px') 
+            .attr("color", "black")
             .call((g) => g.append("text")
                 .attr("x", 0)
                 .attr("y", 0)
