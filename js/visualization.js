@@ -1,6 +1,7 @@
 const margin = { top: 50, right: 50, bottom: 50, left: 200 };
 const width = 900; 
 const height = 650; 
+const yTooltipOffset = 15; 
 
 // defines the first svg scatter plot
 const svg1 = d3.select("#vis-container")
@@ -29,6 +30,32 @@ const svg4 = d3.select("#vis-container")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
                 .attr("viewBox", [0, 0, width, height])
+
+// Add div for tooltip to webpage
+const tooltip1 = d3.select("#vis-container") 
+  .append("div") 
+  .attr('id', "tooltip1") 
+  .style("opacity", 0) 
+  .attr("class", "tooltip"); 
+
+// Add values to tooltip on mouseover, make tooltip div opaque  
+const mouseover= function(event, d) {
+  tooltip1.html("Name: " + d.name +  "<br> Radius: " + d.radius + "<br>"
+     + "<br> Mass: " + d.mass + "<br>" + "<br> Orbital Period: " + d.orbital_period + "<br>" 
+     + "<br> Eccentricity: " + d.eccentricity + "<br>" + "<br> Discovery Year: " + d.discovered + "<br>")
+     .style("opacity", 1);  
+}
+
+// Position tooltip to follow mouse 
+const mousemove = function(event, d) {
+  tooltip1.style("left", (event.pageX)+"px") 
+      .style("top", (event.pageY + yTooltipOffset)+"px"); 
+}
+
+// Return tooltip to transparant when mouse leaves
+const mouseleave = function(event, d) { 
+  tooltip1.style("opacity", 0); 
+}
                     
 
 // Plotting 
@@ -42,6 +69,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
   
     // Plot 1
     {
+
         xKey1 = "radius"
         yKey1 = "eccentricity"
 
@@ -88,6 +116,15 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("text-anchor", "end")
                 .text(yKey1));
 
+       // initialize the brush
+       brush1 = d3.brush().extent([[0, 0], [width, height]])
+       
+       // call the brush for the first scatterplot
+       svg1.call(brush1
+            .on("start", clear)
+            .on("brush", updateChart1)
+        );
+          
         // Add points
         myCircles1 = svg1.append('g')
             .selectAll("circle")
@@ -99,17 +136,10 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("cy", (d) => y1(d[yKey1]))
                 .attr("r", 8)
                 .style("fill", "blue") // TODO: ADD COLORS
-                .style("opacity", 0.5);
-
-       // initialize the brush
-       brush1 = d3.brush().extent([[0, 0], [width, height]])
-       
-       // call the brush for the first scatterplot
-       svg1.call(brush1
-            .on("start", clear)
-            .on("brush", updateChart1)
-        );
-             
+                .style("opacity", 0.5)
+                .on("mouseover", mouseover)
+                .on("mousemove", mousemove)
+                .on("mouseleave", mouseleave);
     } 
 
     // Plot 2
@@ -170,7 +200,10 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("cy", (d) => y2(d[yKey2]))
                 .attr("r", 8)
                 .style("fill", "blue") // TODO: ADD COLORS
-                .style("opacity", 0.5);
+                .style("opacity", 0.5)
+                .on("mouseover", mouseover)
+                .on("mousemove", mousemove)
+                .on("mouseleave", mouseleave);
         
         // initialize the brush for the second scatterplot
         brush2 = d3.brush().extent([[0, 0], [width, height]])
@@ -201,7 +234,6 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 dataPoints: bin.length,
                 bucketMin: bin.x0,
                 bucketMax: bin.x1
-
             }
         })
 
@@ -251,7 +283,10 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                  .attr("y", (d) => y3(d.dataPoints)) 
                  .attr("height", (d) => height - margin.bottom - (y3(d.dataPoints)))  
                  .attr("width", x3.bandwidth())
-                 .style("fill", "green")      
+                 .style("fill", "green")    
+                 .on("mouseover", mouseover)
+                 .on("mousemove", mousemove)
+                 .on("mouseleave", mouseleave);  
     }
 
     // Plot 4 
@@ -324,11 +359,11 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                  .attr("height", (d) => height - margin.bottom - (y4(d.dataPoints)))  
                  .attr("width", x4.bandwidth())
                  .style("fill", "green") 
+                 .on("mouseover", mouseover)
+                 .on("mousemove", mousemove)
+                 .on("mouseleave", mouseleave);
                  
     }  
-
-    
-
 
     // Call to remove existing brushes 
     function clear() {
