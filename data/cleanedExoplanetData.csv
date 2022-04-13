@@ -1,4 +1,4 @@
-,# name,mass,radius,orbital_period,semi_major_axis,eccentricity,angular_distance,inclination,discovered
+,name,mass,radius,orbital_period,semi_major_axis,eccentricity,angular_distance,inclination,discovered
 23,2M 2140+16 b,20.0,0.92,7340.0,3.53,0.26,0.1412,46.2,2010.0
 24,2M 2206-20 b,30.0,1.3,8686.0,4.48,0.0,0.167979,44.3,2010.0
 94,51 Peg b,0.47,1.9,4.2308,0.052,0.0069,0.003537,80.0,1995.0
