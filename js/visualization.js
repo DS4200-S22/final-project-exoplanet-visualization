@@ -60,6 +60,12 @@ const mouseleave = function(event, d) {
 }
                     
 
+d3.csv("data/cleanedExoplanetData2.csv").then((data) => {
+
+    let max = d3.max(data, (d) => { return d[xKey2]; });
+    console.log("MAX X 2: " + max)
+}
+
 // Plotting 
 d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
@@ -172,7 +178,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         // Find max x
         let maxX2 = d3.max(data, (d) => { return d[xKey2]; });
-        console.log("MAX X 2: " + maxX2)
+        //console.log("MAX X 2: " + maxX2)
         
         // Set min x 
         let minX2 = 0;
