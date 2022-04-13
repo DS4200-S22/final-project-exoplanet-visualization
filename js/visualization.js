@@ -82,9 +82,9 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         yKey1 = "eccentricity"
 
         // Find max x
-        //let maxX1 = d3.max(data, (d) => { return d[xKey1]; });
-        let maxX1 = 30;
+        let maxX1 = d3.max(data, (d) => { return d[xKey1]; });
         
+
         // Set min x
         let minX1 = 0;
 
@@ -172,9 +172,9 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         yKey2 = "eccentricity"
 
         // Find max x
-        let maxX2 = d3.max(data, (d) => { return d[xKey2]; });
+        //let maxX2 = d3.max(data, (d) => { return d[xKey2]; });
         //console.log("MAX X 2: " + maxX2)
-        
+        let maxX2 = 30;
         // Set min x 
         let minX2 = 0;
 
