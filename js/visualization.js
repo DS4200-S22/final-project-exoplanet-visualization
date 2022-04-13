@@ -20,14 +20,14 @@ const svg2 = d3.select("#vis-container")
                     .extent([[margin.left, margin.top], [width + margin.left, height + margin.top ]]));
 
 // defines the third svg histogram
-const svg3 = d3.select("#vis-container")
+const svg3 = d3.select("#vis-container2")
                 .append("svg")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
                 .attr("viewBox", [0, 0, width, height])
 
 // defines the fourth svg histogram
-const svg4 = d3.select("#vis-container")
+const svg4 = d3.select("#vis-container2")
                 .append("svg")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
