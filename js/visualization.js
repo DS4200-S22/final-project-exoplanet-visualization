@@ -167,7 +167,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
     // Plot 2
     {
-        xKey2 = "mass "
+        xKey2 = "mass"
         yKey2 = "eccentricity"
 
         // Find max x
