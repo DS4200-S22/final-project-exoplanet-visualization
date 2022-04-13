@@ -104,7 +104,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .text("Eccentricity of Exoplanet's Orbit vs Exoplanet's Radius"));
 
         // Add x axis 
-        svg1.append("g")
+        var xAxis1 = svg1.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`) 
             .call(d3.axisBottom(x1))   
             .attr("font-size", '20px')
@@ -193,7 +193,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                .text("Eccentricity of Exoplanet's Orbit vs Exoplanet's Mass"));
 
         // Add x axis 
-        svg2.append("g")
+        var xAxis2 = svg2.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`) 
             .call(d3.axisBottom(x2))   
             .attr("font-size", '20px')
@@ -451,35 +451,44 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1; // This return TRUE or FALSE depending on if the points is in the selected area
     }
 
-    function filter_lower_mass(bound) {
+    function update_radius_bound() {
+        // Get the value of the button
+        xlim = this.value
 
+        // Update X axis
+        x1.domain([0,xlim])
+        xAxis1.transition().duration(1000).call(d3.axisBottom(x1))
+
+        // Update chart
+        svg1.selectAll("circle")
+            .data(data)
+            .transition()
+            .duration(1000)
+            .attr("cx", function (d) { return x1(d[xKey1]); } )
+            .attr("cy", function (d) { return y1(d[yKey1]); } )
 
     }
 
+    function update_mass_bound() {
+        // Get the value of the button
+        xlim = this.value
 
-    // Listen to the lower bound input -> filter if user changes it
-    d3.select("#lowRadius").on("input", function() {
-        minX1 = this.value; 
-        console.log("updated minX1 = " + maxX1)
-    });
+        // Update X axis
+        x2.domain([0,xlim])
+        xAxis2.transition().duration(1000).call(d3.axisBottom(x2))
 
-    // Listen to the upper bound input -> filter if user changes it
-    d3.select("#upRadius").on("input", function() {
-        maxX1 = this.value; 
-        console.log("updated maxX1 = " + maxX1)
-    });
+        // Update chart
+        svg2.selectAll("circle")
+            .data(data)
+            .transition()
+            .duration(1000)
+            .attr("cx", function (d) { return x2(d[xKey2]); } )
+            .attr("cy", function (d) { return y2(d[yKey2]); } )
 
-    // Listen to the lower bound input -> filter if user changes it
-    d3.select("#lowMass").on("input", function() {
-        minX2 = this.value; 
-        console.log("updated minX2 = " + maxX2)
-    });
+    }
 
-    // Listen to the upper bound input -> filter if user changes it
-    d3.select("#upMass").on("input", function() {
-        maxX2 = this.value; 
-        console.log("updated maxX2 = " + maxX2)
-    });
+    d3.select("#upRadius").on("input", update_radius_bound )
 
+    d3.select("#upMass").on("input", update_mass_bound )
 }); 
 
