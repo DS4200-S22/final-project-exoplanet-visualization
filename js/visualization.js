@@ -256,25 +256,26 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
     // Plot 3
     {
-        xKey3 = "mass"
+        xKey3 = "radius"
 
         // Find max x
         let maxX3 = d3.max(data, (d) => { return d[xKey3]; });
 
-        // Finx max y 
-        let maxY3 = 76;
-
-        const thresholds = d3.range(maxX3 + 1)
-        const binner = d3.bin().value(d=>d[xKey3]).thresholds(thresholds).domain([0,maxX3])
-        const binned = binner(data)
-        const medians = binned.map(bin => {
+        const thresholdsRadius = d3.range(maxX3)
+        const binnerRadius = d3.bin().value(d=>d[xKey3]).thresholds(thresholdsRadius).domain([0,maxX3])
+        const binnedRadius = binnerRadius(data)
+        const mediansRadius = binnedRadius.map(bin => {
             return {
-                medianMass: d3.median(bin, b=>b[xKey3]),
+                medianRadius: d3.median(bin, b=>b[xKey3]),
                 dataPoints: bin.length,
                 bucketMin: bin.x0,
                 bucketMax: bin.x1
+
             }
         })
+
+        // Find max y 
+        let maxY3 = 110;
 
         // Create y scale   
         let y3 = d3.scaleLinear()
@@ -283,7 +284,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         // Create x scale
         let x3 = d3.scaleBand()
-            .domain(d3.range(medians.length))
+            .domain(d3.range(mediansRadius.length))
             .range([margin.left, width - margin.right])
             .padding(0.1); 
 
@@ -313,8 +314,8 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("text-anchor", "end")
                 .text("frequency"));
            
-        bars1 = svg3.selectAll(".bar")
-                .data(medians)
+        bars2 = svg3.selectAll(".bar")
+                .data(mediansRadius)
                 .enter()
                 .append("rect") 
                  .attr("class", "bar") 
@@ -322,34 +323,33 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                  .attr("y", (d) => y3(d.dataPoints)) 
                  .attr("height", (d) => height - margin.bottom - (y3(d.dataPoints)))  
                  .attr("width", x3.bandwidth())
-                 .style("fill", "green")    
+                 .style("fill", "green") 
                  .on("mouseover", mouseover)
                  .on("mousemove", mousemove)
-                 .on("mouseleave", mouseleave);  
-    }
+                 .on("mouseleave", mouseleave);            
+    } 
 
     // Plot 4 
     {
-        xKey4 = "radius"
+        xKey4 = "mass"
 
         // Find max x
         let maxX4 = d3.max(data, (d) => { return d[xKey4]; });
 
-        const thresholdsRadius = d3.range(maxX4)
-        const binnerRadius = d3.bin().value(d=>d[xKey4]).thresholds(thresholdsRadius).domain([0,maxX4])
-        const binnedRadius = binnerRadius(data)
-        const mediansRadius = binnedRadius.map(bin => {
+        // Finx max y 
+        let maxY4 = 76;
+
+        const thresholds = d3.range(maxX4 + 1)
+        const binner = d3.bin().value(d=>d[xKey4]).thresholds(thresholds).domain([0,maxX4])
+        const binned = binner(data)
+        const medians = binned.map(bin => {
             return {
-                medianRadius: d3.median(bin, b=>b[xKey4]),
+                medianMass: d3.median(bin, b=>b[xKey4]),
                 dataPoints: bin.length,
                 bucketMin: bin.x0,
                 bucketMax: bin.x1
-
             }
         })
-
-        // Find max y 
-        let maxY4 = 110;
 
         // Create y scale   
         let y4 = d3.scaleLinear()
@@ -358,7 +358,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
         // Create x scale
         let x4 = d3.scaleBand()
-            .domain(d3.range(mediansRadius.length))
+            .domain(d3.range(medians.length))
             .range([margin.left, width - margin.right])
             .padding(0.1); 
 
@@ -388,8 +388,8 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("text-anchor", "end")
                 .text("frequency"));
            
-        bars2 = svg4.selectAll(".bar")
-                .data(mediansRadius)
+        bars1 = svg4.selectAll(".bar")
+                .data(medians)
                 .enter()
                 .append("rect") 
                  .attr("class", "bar") 
@@ -397,12 +397,12 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                  .attr("y", (d) => y4(d.dataPoints)) 
                  .attr("height", (d) => height - margin.bottom - (y4(d.dataPoints)))  
                  .attr("width", x4.bandwidth())
-                 .style("fill", "green") 
+                 .style("fill", "green")    
                  .on("mouseover", mouseover)
                  .on("mousemove", mousemove)
-                 .on("mouseleave", mouseleave);
-                 
-    }  
+                 .on("mouseleave", mouseleave);  
+    }
+ 
 
     // Call to remove existing brushes 
     function clear() {
