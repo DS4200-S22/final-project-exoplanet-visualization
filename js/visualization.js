@@ -299,7 +299,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("y", margin.bottom)
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
-                .text(xKey3)); 
+                .text("Radius (Jupiters)")); 
 
         // Add y axis 
         svg3.append("g")
@@ -312,7 +312,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("y", 0)
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
-                .text("frequency"));
+                .text("Frequency"));
            
         bars2 = svg3.selectAll(".bar")
                 .data(mediansRadius)
@@ -373,7 +373,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("y", margin.bottom)
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
-                .text(xKey4)); 
+                .text("Mass (Jupiters)")); 
 
         // Add y axis 
         svg4.append("g")
@@ -386,7 +386,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("y", 0)
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
-                .text("frequency"));
+                .text("Frequency"));
            
         bars1 = svg4.selectAll(".bar")
                 .data(medians)
