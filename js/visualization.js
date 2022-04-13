@@ -86,6 +86,17 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         x1 = d3.scaleLinear()
             .domain([0, maxX1])
             .range([margin.left, width-margin.right]); 
+        
+        // Adds a title to the visualization
+        svg1.append("g")
+             .attr("transform", `translate(10,${(margin.top/2) - 50 })`) 
+            .call((g) => g.append("text")
+                .attr("x", width/2)             
+                .attr("y", margin.top)
+                .attr("fill", "black")
+                .attr("text-anchor", "middle")
+                .attr("font-size", "35px")
+                .text("Eccentricity of Exoplanet's Orbit vs Exoplanet's Radius"));
 
         // Add x axis 
         svg1.append("g")
@@ -121,7 +132,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
                 .text(yKey1));
-
+        
        // initialize the brush
        brush1 = d3.brush().extent([[0, 0], [width, height]])
        
@@ -146,6 +157,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .on("mouseover", mouseover)
                 .on("mousemove", mousemove)
                 .on("mouseleave", mouseleave);
+
     } 
 
     // Plot 2
@@ -160,6 +172,17 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         x2 = d3.scaleLinear()
             .domain([0,maxX2])
             .range([margin.left, width-margin.right]); 
+
+        // Add a title for the visualization
+        svg2.append("g")
+            .attr("transform", `translate(${width/2 - margin.left - 200}, ${margin.top/2 - 50})`) 
+            .call((g) => g.append("text")
+               .attr("x", width/2)             
+               .attr("y", margin.top)
+               .attr("fill", "black")
+               .attr("text-anchor", "middle")
+               .attr("font-size", "35px")
+               .text("Eccentricity of Exoplanet's Orbit vs Exoplanet's Mass"));
 
         // Add x axis 
         svg2.append("g")
