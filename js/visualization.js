@@ -84,9 +84,12 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         // Find max x
         let maxX1 = d3.max(data, (d) => { return d[xKey1]; });
 
+        // Set min x
+        let minX1 = 0;
+
         // Create X scale
         x1 = d3.scaleLinear()
-            .domain([0, maxX1])
+            .domain([minX1, maxX1])
             .range([margin.left, width-margin.right]); 
         
         // Adds a title to the visualization
@@ -170,9 +173,12 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         // Find max x
         let maxX2 = d3.max(data, (d) => { return d[xKey2]; });
         
+        // Set min x 
+        let minX2 = 0;
+
         // Create X scale
         x2 = d3.scaleLinear()
-            .domain([0,maxX2])
+            .domain([minX2,maxX2])
             .range([margin.left, width-margin.right]); 
 
         // Add a title for the visualization
@@ -452,23 +458,26 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
     // Listen to the lower bound input -> filter if user changes it
     d3.select("#lowMass").on("input", function() {
-        maxX1 = this.value; 
-        console.log("updated maxX1 = " + maxX1)
+        minX1 = this.value; 
+        console.log("updated minX1 = " + maxX1)
     });
 
     // Listen to the upper bound input -> filter if user changes it
     d3.select("#upMass").on("input", function() {
-        //filter_upper_mass(+this.value);
+        maxX1 = this.value; 
+        console.log("updated maxX1 = " + maxX1)
     });
 
     // Listen to the lower bound input -> filter if user changes it
     d3.select("#lowRadius").on("input", function() {
-        //filter_lower_radius(+this.value);
+        minX2 = this.value; 
+        console.log("updated minX2 = " + maxX2)
     });
 
     // Listen to the upper bound input -> filter if user changes it
     d3.select("#upRadius").on("input", function() {
-        //filter_upper_radius(+this.value);
+        maxX2 = this.value; 
+        console.log("updated maxX2 = " + maxX2)
     });
 
 }); 

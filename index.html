@@ -66,25 +66,29 @@
 <br><br><br>
 <div class='toggle' id='toggle'>
   
-  <div class="massButton" id="massButton">
-      
-    <label for="mass">mass</label>
-
-    <input type="number" min="0" max="2" step="0.1" value="0" id="lowMass">
-    to
-    <input type="number" min="0" max="2" step="0.1" value="0" id="upMass">
-
-  
-  </div>  
-  
   <div class="radiusButton" id="radiusButton">
     
     <label for="radius">radius</label>
     
-    <input type="text" name="lowerBound" value="lower bound" id="lowRadius">
-    <input type="text" name="upperBound" value="upper bound" id="upRadius">
+    <input type="number" min="0" max="2" step="0.1" value="0" id="lowRadius">
+    to
+    <input type="number" min="0" max="2" step="0.1" value="2" id="upRadius">
   
   </div>
+
+
+  <div class="massButton" id="massButton">
+      
+    <label for="mass">mass</label>
+
+    <input type="number" min="0" max="10" step="1" value="0" id="lowMass">
+    to
+    <input type="number" min="0" max="10" step="1" value="10" id="upMass">
+
+  
+  </div>  
+  
+  
 </div>
   
   
