@@ -60,12 +60,6 @@ const mouseleave = function(event, d) {
 }
                     
 
-d3.csv("data/cleanedExoplanetData2.csv").then((data) => {
-
-    let max = d3.max(data, (d) => { return d["mass"]; });
-    console.log("MAX X 2: " + max)
-});
-
 // Plotting 
 d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
@@ -120,7 +114,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("y", margin.bottom)
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
-                .text("radius (Jupiters)"));
+                .text("Radius (Jupiters)"));
 
 
         // Find max y 
@@ -142,7 +136,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("y", margin.top)
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
-                .text(yKey1));
+                .text("Eccentricity"));
         
        // initialize the brush
        brush1 = d3.brush().extent([[0, 0], [width, height]])
@@ -210,7 +204,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("y", margin.bottom)
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
-                .text("mass (Jupiters)"));
+                .text("Mass (Jupiters)"));
 
         // Find max y 
         let maxY2 = d3.max(data, (d) => { return d[yKey2]; });
@@ -231,7 +225,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("y", margin.top)
                 .attr("fill", "black")
                 .attr("text-anchor", "middle")
-                .text(yKey2));
+                .text("Eccentricity"));
 
         // Add points
         myCircles2 = svg2.append('g')
