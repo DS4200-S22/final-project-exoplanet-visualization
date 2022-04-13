@@ -4,14 +4,14 @@ const height = 650;
 const yTooltipOffset = 15; 
 
 // defines the first svg scatter plot
-const svg1 = d3.select("#vis-container")
+const svg1 = d3.select("#vis-container1")
                 .append("svg")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
                 .attr("viewBox", [0, 0, width, height]);
                  
 // defines the second svg scatter plot
-const svg2 = d3.select("#vis-container")
+const svg2 = d3.select("#vis-container1")
                 .append("svg")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
@@ -34,7 +34,7 @@ const svg4 = d3.select("#vis-container2")
                 .attr("viewBox", [0, 0, width, height])
 
 // Add div for tooltip to webpage
-const tooltip1 = d3.select("#vis-container") 
+const tooltip1 = d3.select("#vis-container1") 
   .append("div") 
   .attr('id', "tooltip1") 
   .style("opacity", 0) 
