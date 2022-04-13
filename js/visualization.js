@@ -19,12 +19,14 @@ const svg2 = d3.select("#vis-container")
                 .call( d3.brush() 
                     .extent([[margin.left, margin.top], [width + margin.left, height + margin.top ]]));
 
+// defines the third svg histogram
 const svg3 = d3.select("#vis-container")
                 .append("svg")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
                 .attr("viewBox", [0, 0, width, height])
 
+// defines the fourth svg histogram
 const svg4 = d3.select("#vis-container")
                 .append("svg")
                 .attr("width", width - margin.left - margin.right)
@@ -442,6 +444,32 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
             y1 = brush_coords[1][1];
         return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1; // This return TRUE or FALSE depending on if the points is in the selected area
     }
+
+    function filter_lower_mass(bound) {
+
+
+    }
+
+    // Listen to the lower bound input -> filter if user changes it
+    d3.select("#lowMass").on("input", function() {
+        maxX1 = this.value; 
+        console.log("updated maxX1 = " + maxX1)
+    });
+
+    // Listen to the upper bound input -> filter if user changes it
+    d3.select("#upMass").on("input", function() {
+        //filter_upper_mass(+this.value);
+    });
+
+    // Listen to the lower bound input -> filter if user changes it
+    d3.select("#lowRadius").on("input", function() {
+        //filter_lower_radius(+this.value);
+    });
+
+    // Listen to the upper bound input -> filter if user changes it
+    d3.select("#upRadius").on("input", function() {
+        //filter_upper_radius(+this.value);
+    });
 
 }); 
 
