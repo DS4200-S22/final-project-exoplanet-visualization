@@ -30,6 +30,12 @@ h1, h2, h3 {
 	background-color: white;
 }
 
+.toggle {
+	margin: auto;
+	width: 50%;
+	border: 3px solid green;
+	padding: 10px;
+}
 
 .selected {
 	fill: orange;
