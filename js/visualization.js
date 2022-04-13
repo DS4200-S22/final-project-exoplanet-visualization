@@ -62,7 +62,7 @@ const mouseleave = function(event, d) {
 
 d3.csv("data/cleanedExoplanetData2.csv").then((data) => {
 
-    let max = d3.max(data, (d) => { return d[xKey2]; });
+    let max = d3.max(data, (d) => { return d["mass"]; });
     console.log("MAX X 2: " + max)
 });
 
