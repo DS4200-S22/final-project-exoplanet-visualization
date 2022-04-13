@@ -82,7 +82,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         yKey1 = "eccentricity"
 
         // Find max x
-        let maxX1 = d3.max(data, (d) => { return d[xKey1]; });
+        let maxX1 = d3.select("#upRadius")//d3.max(data, (d) => { return d[xKey1]; });
 
         // Set min x
         let minX1 = 0;
@@ -171,7 +171,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         yKey2 = "eccentricity"
 
         // Find max x
-        let maxX2 = d3.max(data, (d) => { return d[xKey2]; });
+        let maxX2 = d3.select("#upMass")//d3.max(data, (d) => { return d[xKey2]; });
         
         // Set min x 
         let minX2 = 0;
@@ -456,26 +456,27 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
 
     }
 
+
     // Listen to the lower bound input -> filter if user changes it
-    d3.select("#lowMass").on("input", function() {
+    d3.select("#lowRadius").on("input", function() {
         minX1 = this.value; 
         console.log("updated minX1 = " + maxX1)
     });
 
     // Listen to the upper bound input -> filter if user changes it
-    d3.select("#upMass").on("input", function() {
+    d3.select("#upRadius").on("input", function() {
         maxX1 = this.value; 
         console.log("updated maxX1 = " + maxX1)
     });
 
     // Listen to the lower bound input -> filter if user changes it
-    d3.select("#lowRadius").on("input", function() {
+    d3.select("#lowMass").on("input", function() {
         minX2 = this.value; 
         console.log("updated minX2 = " + maxX2)
     });
 
     // Listen to the upper bound input -> filter if user changes it
-    d3.select("#upRadius").on("input", function() {
+    d3.select("#upMass").on("input", function() {
         maxX2 = this.value; 
         console.log("updated maxX2 = " + maxX2)
     });
