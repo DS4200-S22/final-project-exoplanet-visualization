@@ -66,6 +66,12 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
   
   let brush1, brush2;
   let myCircles1, myCircles2;
+
+  // colors for the years of discovery
+  let myColor = d3.scaleSequential().domain([2010, 
+    1995, 2004, 2007, 2011, 2008, 2009, 2006, 2012,
+    2000, 2005, 1999, 2001, 2002, 1996])
+    .interpolator(d3.interpolateViridis);
   
     // Plot 1
     {
@@ -135,8 +141,8 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("cx", (d) => x1(d[xKey1]))
                 .attr("cy", (d) => y1(d[yKey1]))
                 .attr("r", 8)
-                .style("fill", "blue") // TODO: ADD COLORS
-                .style("opacity", 0.5)
+                .attr("fill", function(d){return myColor(d.discovered) })
+                .style("opacity", 0.75)
                 .on("mouseover", mouseover)
                 .on("mousemove", mousemove)
                 .on("mouseleave", mouseleave);
@@ -199,8 +205,8 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("cx", (d) => x2(d[xKey2]))
                 .attr("cy", (d) => y2(d[yKey2]))
                 .attr("r", 8)
-                .style("fill", "blue") // TODO: ADD COLORS
-                .style("opacity", 0.5)
+                .attr("fill", function(d){return myColor(d.discovered) })
+                .style("opacity", 0.75)
                 .on("mouseover", mouseover)
                 .on("mousemove", mousemove)
                 .on("mouseleave", mouseleave);
