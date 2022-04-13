@@ -82,8 +82,9 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         yKey1 = "eccentricity"
 
         // Find max x
-        let maxX1 = d3.max(data, (d) => { return d[xKey1]; });
-
+        //let maxX1 = d3.max(data, (d) => { return d[xKey1]; });
+        let maxX1 = 30;
+        
         // Set min x
         let minX1 = 0;
 
@@ -253,6 +254,80 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
         );        
     }
 
+    // Plot 3
+    {
+        xKey3 = "mass"
+
+        // Find max x
+        let maxX3 = d3.max(data, (d) => { return d[xKey3]; });
+
+        // Finx max y 
+        let maxY3 = 76;
+
+        const thresholds = d3.range(maxX3 + 1)
+        const binner = d3.bin().value(d=>d[xKey3]).thresholds(thresholds).domain([0,maxX3])
+        const binned = binner(data)
+        const medians = binned.map(bin => {
+            return {
+                medianMass: d3.median(bin, b=>b[xKey3]),
+                dataPoints: bin.length,
+                bucketMin: bin.x0,
+                bucketMax: bin.x1
+            }
+        })
+
+        // Create y scale   
+        let y3 = d3.scaleLinear()
+            .domain([0,maxY3])
+            .range([height-margin.bottom,margin.top]); 
+
+        // Create x scale
+        let x3 = d3.scaleBand()
+            .domain(d3.range(medians.length))
+            .range([margin.left, width - margin.right])
+            .padding(0.1); 
+
+        // Add x axis 
+        svg3.append("g")
+            .attr("transform", `translate(0,${height - margin.bottom})`) 
+            .call(d3.axisBottom(x3))   
+            .attr("font-size", '20px')
+            .attr("color", "black")
+            .call((g) => g.append("text")
+                .attr("x", width - margin.right)
+                .attr("y", margin.bottom)
+                .attr("fill", "black")
+                .attr("text-anchor", "end")
+                .text(xKey3)); 
+
+        // Add y axis 
+        svg3.append("g")
+            .attr("transform", `translate(${margin.left}, 0)`) 
+            .call(d3.axisLeft(y3)) 
+            .attr("font-size", '20px') 
+            .attr("color", "black")
+            .call((g) => g.append("text")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("fill", "black")
+                .attr("text-anchor", "end")
+                .text("frequency"));
+           
+        bars1 = svg3.selectAll(".bar")
+                .data(medians)
+                .enter()
+                .append("rect") 
+                 .attr("class", "bar") 
+                 .attr("x", (d,i) => x3(i)) 
+                 .attr("y", (d) => y3(d.dataPoints)) 
+                 .attr("height", (d) => height - margin.bottom - (y3(d.dataPoints)))  
+                 .attr("width", x3.bandwidth())
+                 .style("fill", "green")    
+                 .on("mouseover", mouseover)
+                 .on("mousemove", mousemove)
+                 .on("mouseleave", mouseleave);  
+    }
+
     // Plot 4 
     {
         xKey4 = "radius"
@@ -327,81 +402,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                  .on("mousemove", mousemove)
                  .on("mouseleave", mouseleave);
                  
-    } 
-
-    // Plot 3
-    {
-        xKey3 = "mass"
-
-        // Find max x
-        let maxX3 = d3.max(data, (d) => { return d[xKey3]; });
-
-        // Finx max y 
-        let maxY3 = 76;
-
-        const thresholds = d3.range(maxX3 + 1)
-        const binner = d3.bin().value(d=>d[xKey3]).thresholds(thresholds).domain([0,maxX3])
-        const binned = binner(data)
-        const medians = binned.map(bin => {
-            return {
-                medianMass: d3.median(bin, b=>b[xKey3]),
-                dataPoints: bin.length,
-                bucketMin: bin.x0,
-                bucketMax: bin.x1
-            }
-        })
-
-        // Create y scale   
-        let y3 = d3.scaleLinear()
-            .domain([0,maxY3])
-            .range([height-margin.bottom,margin.top]); 
-
-        // Create x scale
-        let x3 = d3.scaleBand()
-            .domain(d3.range(medians.length))
-            .range([margin.left, width - margin.right])
-            .padding(0.1); 
-
-        // Add x axis 
-        svg3.append("g")
-            .attr("transform", `translate(0,${height - margin.bottom})`) 
-            .call(d3.axisBottom(x3))   
-            .attr("font-size", '20px')
-            .attr("color", "black")
-            .call((g) => g.append("text")
-                .attr("x", width - margin.right)
-                .attr("y", margin.bottom)
-                .attr("fill", "black")
-                .attr("text-anchor", "end")
-                .text(xKey3)); 
-
-        // Add y axis 
-        svg3.append("g")
-            .attr("transform", `translate(${margin.left}, 0)`) 
-            .call(d3.axisLeft(y3)) 
-            .attr("font-size", '20px') 
-            .attr("color", "black")
-            .call((g) => g.append("text")
-                .attr("x", 0)
-                .attr("y", 0)
-                .attr("fill", "black")
-                .attr("text-anchor", "end")
-                .text("frequency"));
-           
-        bars1 = svg3.selectAll(".bar")
-                .data(medians)
-                .enter()
-                .append("rect") 
-                 .attr("class", "bar") 
-                 .attr("x", (d,i) => x3(i)) 
-                 .attr("y", (d) => y3(d.dataPoints)) 
-                 .attr("height", (d) => height - margin.bottom - (y3(d.dataPoints)))  
-                 .attr("width", x3.bandwidth())
-                 .style("fill", "green")    
-                 .on("mouseover", mouseover)
-                 .on("mousemove", mousemove)
-                 .on("mouseleave", mouseleave);  
-    } 
+    }  
 
     // Call to remove existing brushes 
     function clear() {
