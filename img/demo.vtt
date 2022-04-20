@@ -1,0 +1,64 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.634
+Welcome to our project on exoplanet visualization
+
+00:00:03.634 --> 00:00:12.434
+By Nick, Aiden, Frank, and Ayushi. This is our final project for Data Visualization at Northeastern in Spring 2022.
+
+00:00:12.434 --> 00:00:15.500
+And welcome to our Github page
+
+00:00:15.500 --> 00:00:18.500
+In the top left, you can see the link to our Github repo.
+
+00:00:18.500 --> 00:00:20.834
+And we also have an abstract and some links up top. 
+
+00:00:20.834 --> 00:00:27.367
+In the actual contents of the page, we have some graphs comparing the exoplanet's orbit
+
+00:00:27.367 --> 00:00:29.300
+and its eccentricity, that is how close it is
+
+00:00:29.300 --> 00:00:35.700
+to a perfect circle. A zero is essentially a flatline elipse, and a one is basically a circle.
+
+00:00:35.700 --> 00:00:42.034
+We can see that compared to the radius of each planet in Jupiters, and also the mass of it in Jupiters.
+
+00:00:42.034 --> 00:00:49.967
+To change these graphs, we are able to use these up top and change this to say, 0.5, for a closer examination on the left,
+
+00:00:49.967 --> 00:00:57.434
+or if we want to expand the scale on the right, we can make it 10. We are also able to change these incrementally by using the arrows, 
+
+00:00:57.434 --> 00:01:02.000
+so if we want to get this back to one, we can also just raise it up to a value of one. 
+
+00:01:02.000 --> 00:01:07.534
+On the graphs themselves, you're able to basically get more data about a certain planet
+
+00:01:07.534 --> 00:01:15.767
+by hovering over it, and it displays more data about that planet, like it's orbital period and discovery year. It also works on the graph on the left.
+
+00:01:15.767 --> 00:01:21.034
+Moving down, there are some more plots here as we are able to see the amount of planets that are closer to 
+
+00:01:21.034 --> 00:01:26.267
+either being no Jupiters in radius or one full Jupiter in Radius, compared to where they round. 
+
+00:01:26.267 --> 00:01:30.234
+But maybe more interesting, on the right here, we can see where they fall in terms of mass,
+
+00:01:30.234 --> 00:01:32.034
+as we have a lot of planets clustered on the left,
+
+00:01:32.034 --> 00:01:34.134
+where they are not even one Jupiter in mass, 
+
+00:01:34.134 --> 00:01:36.134
+but a lot more spread out on the right. 
+
