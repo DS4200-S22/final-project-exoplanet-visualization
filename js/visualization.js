@@ -58,7 +58,6 @@ const mousemove = function(event, d) {
 const mouseleave = function(event, d) { 
   tooltip1.style("opacity", 0); 
 }
-                    
 
 // Plotting 
 d3.csv("data/cleanedExoplanetData.csv").then((data) => {
@@ -105,7 +104,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .text("Eccentricity of Exoplanet's Orbit vs Exoplanet's Radius"));
 
         // Add x axis 
-        var xAxis1 = svg1.append("g")
+        let xAxis1 = svg1.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`) 
             .call(d3.axisBottom(x1))   
             .attr("font-size", '20px')
@@ -138,7 +137,8 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
                 .text("Eccentricity"));
-        
+
+            
        // initialize the brush
        brush1 = d3.brush().extent([[0, 0], [width, height]])
        
@@ -195,7 +195,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                .text("Eccentricity of Exoplanet's Orbit vs Exoplanet's Mass"));
 
         // Add x axis 
-        var xAxis2 = svg2.append("g")
+        let xAxis2 = svg2.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`) 
             .call(d3.axisBottom(x2))   
             .attr("font-size", '20px')
@@ -323,10 +323,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                  .attr("y", (d) => y3(d.dataPoints)) 
                  .attr("height", (d) => height - margin.bottom - (y3(d.dataPoints)))  
                  .attr("width", x3.bandwidth())
-                 .style("fill", "green") 
-                 .on("mouseover", mouseover)
-                 .on("mousemove", mousemove)
-                 .on("mouseleave", mouseleave);            
+                 .style("fill", "green");        
     } 
 
     // Plot 4 
@@ -397,10 +394,7 @@ d3.csv("data/cleanedExoplanetData.csv").then((data) => {
                  .attr("y", (d) => y4(d.dataPoints)) 
                  .attr("height", (d) => height - margin.bottom - (y4(d.dataPoints)))  
                  .attr("width", x4.bandwidth())
-                 .style("fill", "green")    
-                 .on("mouseover", mouseover)
-                 .on("mousemove", mousemove)
-                 .on("mouseleave", mouseleave);  
+                 .style("fill", "green");
     }
  
 
